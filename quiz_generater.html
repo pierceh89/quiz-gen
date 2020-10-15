@@ -8,6 +8,9 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
                 crossorigin="anonymous"></script>
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/solarized-dark.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
         <style>
             div {
                 width: 100%
@@ -19,7 +22,11 @@
 
             textarea {
                 width: 100%
+            }
 
+            .quiz {
+                display: inline-block;
+                width: 150px;
             }
         </style>
     </head>
@@ -29,34 +36,99 @@
                 <div class="col">
                     <h2>Type question</h2>
                     <textarea id="question" rows="30"></textarea>
-                    <button onclick="parseQuestion()">Generate</button>
+                    <button class="btn btn-primary" onclick="parseQuestions()">Generate</button>
+                    <button class="btn btn-success" onclick="submitQuiz()">Submit</button>
                 </div>
                 <div class="col">
                     <h2>Result Html</h2>
-                    <textarea id="result" rows="30"></textarea>
                     <div id="render"></div>
+                </div>
+                <div class="col">
+                    <h2>Answer</h2>
+                    <div id="answer-filling"></div>
                 </div>
             </div>
         </div>
         <script>
             const quizBlock = '[[quiz]]';
+            const quizFragment = '```';
+            let resultHtml = '';
+            let quizCount=0;
 
-            function parseQuestion() {
-                let question = $('#question').val();
-                let found = question.indexOf(quizBlock);
-                let quizScript = question.replaceAll('\n', '<br/>');
+            function submitQuiz() {
+                let answers = [];
+                let answerFields = $('.answer');
+                for(let i=0; i < answerFields.length; i++) {
+                    let ans = answerFields[i].value;
+                    if(ans === '') {
+                        alert(`Please fill in ${i+1}th answer!!!`);
+                        return;
+                    }
+                    answers.push(ans.trim());
+                }
+                let quizSet = {
+                    "quizScript": resultHtml,
+                    "answers": answers
+                };
+                console.log(quizSet);
+            }
+
+            function parseQuestions() {
+                let text = $('#question').val();
+                let questions = [];
+                let start = text.indexOf(quizFragment);
+                let end = text.indexOf(quizFragment, start + quizFragment.length);
+                while(start < end) {
+                    let langDef = text.indexOf('\n');
+                    let lang = text.substring(start+quizFragment.length, langDef);
+                    let question = text.substring(langDef + 1, end);
+                    questions.push({'lang': lang, 'question': question});
+                    text = text.substring(end + quizFragment.length + 1); // add newline
+                    start = text.indexOf(quizFragment);
+                    end = text.indexOf(quizFragment, start + quizFragment.length);
+                }
+                let script = '';
+                quizCount = 0;
+                for(let i=0; i<questions.length; i++) {
+                    let result = parseQuestion(questions[i]['lang'], questions[i]['question'], quizCount);
+                    script += result['html'];
+                    quizCount += result['quizCount'];
+                }
+                resultHtml = script;
+                // $('#result').val(script);
+                $('#render').html(script);
+                hljs.initHighlighting();
+                console.log(quizCount);
+                constructAnswerBlock(quizCount);
+            }
+
+            function parseQuestion(lang, question, initCount) {
+                let quizScript = question; //question.replaceAll('\n', '<br/>');
+                let found = quizScript.indexOf(quizBlock);
                 let quizCount = 0;
                 while (found !== -1) {
                     let left = quizScript.substring(0, found);
                     let right = quizScript.substring(found + quizBlock.length);
-                    let id = `quiz${quizCount}`
-                    quizScript = left + `<input type="text" id="${id}" />` + right;
+                    let id = `quiz${initCount + quizCount}`;
+                    quizScript = left + `<input class="form-control form-control-sm quiz" type="text" id="${id}" />` + right;
                     quizCount += 1;
                     found = quizScript.indexOf(quizBlock, found);
                 }
-                console.log(quizScript);
-                $('#result').val(quizScript);
-                $('#render').html(quizScript);
+                return {
+                    'html': `<pre><code class="${lang}">${quizScript}</code></pre>`,
+                    'quizCount': quizCount
+                };
+            }
+
+            function constructAnswerBlock(quizCount) {
+                let html = '';
+                for(let i=0; i<quizCount; i++) {
+                    html += `<div class="form-group row">
+<label  class="col-sm-2">${i+1}.</label>
+<div class="col-sm-10"><input class="form-control form-control-sm answer" /></div>
+</div>`
+                }
+                $('#answer-filling').html(html);
             }
         </script>
     </body>

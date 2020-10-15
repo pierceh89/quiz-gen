@@ -1,0 +1,13 @@
+```python
+import requests
+from bs4 import [[quiz]]
+
+data = requests.get('')
+soup = BeautifulSoup(data.[[quiz]])
+```
+```javascript
+function() {
+    let address = $('#address').val();
+    console.log([[quiz]]);
+}
+```

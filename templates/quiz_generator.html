@@ -77,6 +77,19 @@
                     "answers": answers
                 };
                 console.log(quizSet);
+                $.ajax({
+                    'url': '/gen',
+                    'method': 'POST',
+                    'data': quizSet,
+                    'success': function(response) {
+                        if(response['result'] === 'success') {
+                            console.log('success quiz set save!');
+                            $('#question').val('');
+                            $('#render').text('');
+                            $('#answer-filling').text('');
+                        }
+                    }
+                })
             }
 
             function parseQuestions() {

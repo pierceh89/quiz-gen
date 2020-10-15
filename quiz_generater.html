@@ -57,6 +57,11 @@
 
             function submitQuiz() {
                 let answers = [];
+                let title = $('#quizSetName').val();
+                if (title === '') {
+                    alert('Please fill in title!!');
+                    return;
+                }
                 let answerFields = $('.answer');
                 for(let i=0; i < answerFields.length; i++) {
                     let ans = answerFields[i].value;
@@ -67,6 +72,7 @@
                     answers.push(ans.trim());
                 }
                 let quizSet = {
+                    "title": title,
                     "quizScript": resultHtml,
                     "answers": answers
                 };
@@ -121,10 +127,13 @@
             }
 
             function constructAnswerBlock(quizCount) {
-                let html = '';
+                let html = `<div class="form-group row">
+<label class="col-sm-2">Quiz Title</label>
+<div class="col-sm-10"><input class="form-control form-control-sm" id="quizSetName" /></div>
+</div>`;
                 for(let i=0; i<quizCount; i++) {
                     html += `<div class="form-group row">
-<label  class="col-sm-2">${i+1}.</label>
+<label class="col-sm-2">${i+1}.</label>
 <div class="col-sm-10"><input class="form-control form-control-sm answer" /></div>
 </div>`
                 }

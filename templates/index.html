@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>스파르타 빈칸 채워넣기</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
               integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
               crossorigin="anonymous">
@@ -15,11 +16,32 @@
             .component-gap {
                 margin-top: 15px;
             }
+
             .quiz {
                 display: inline-block;
                 width: 150px;
             }
         </style>
+    </head>
+    <body>
+        <div class="container-lg">
+            <div class="jumbotron component-gap">
+                <h1>
+                    퀴즈셋 리스트
+                </h1>
+                <hr>
+                <ul id="quizSet">
+                    <li>퀴즈1</li>
+                    <li>퀴즈2</li>
+                </ul>
+            </div>
+            <div class="col component-gap">
+                <div id="render"></div>
+            </div>
+            <div class="col component-gap">
+                <div id="result"></div>
+            </div>
+        </div>
         <script>
             let quizSet = {};
             let currentQuiz = {};
@@ -75,7 +97,7 @@ ${script}
 
                 let givenAnswers = [];
                 let answerForms = $('.quiz');
-                for(let i=0; i<answerForms.length; i++) {
+                for (let i = 0; i < answerForms.length; i++) {
                     givenAnswers.push(answerForms[i].value);
                 }
 
@@ -89,8 +111,8 @@ ${script}
                     'url': '/submit',
                     'method': 'POST',
                     'data': envelope,
-                    'success': function(response) {
-                        if(response['result'] === 'success') {
+                    'success': function (response) {
+                        if (response['result'] === 'success') {
                             let detail = response['detail'];
                             let html = `<h2>결과: ${detail['score']} / ${detail['fullScore']}</h2>`;
                             // let html = `<h2>결과: ${detail['score']} / ${detail['fullScore']}</h2><h2>정답</h2><ol>`;
@@ -111,25 +133,5 @@ ${script}
                 loadQuiz();
             });
         </script>
-    </head>
-    <body>
-        <div class="container-lg">
-            <div class="jumbotron component-gap">
-                <h1>
-                    퀴즈셋 리스트
-                </h1>
-                <hr>
-                <ul id="quizSet">
-                    <li>퀴즈1</li>
-                    <li>퀴즈2</li>
-                </ul>
-            </div>
-            <div class="col component-gap">
-                <div id="render"></div>
-            </div>
-            <div class="col component-gap">
-                <div id="result"></div>
-            </div>
-        </div>
     </body>
 </html>

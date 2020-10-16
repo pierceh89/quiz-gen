@@ -65,6 +65,27 @@ def get_quiz_list():
     })
 
 
+@app.route('/sub')
+def submissions():
+    return render_template('submissions.html')
+
+
+@app.route('/sub-list')
+def get_submissions():
+    subs = list(db.submission.find({}, {'_id': False}))
+    ret = {}
+    for sub in subs:
+        title = sub['title']
+        if title in ret:
+            ret[title].append(sub)
+        else:
+            ret[title] = [sub]
+    return jsonify({
+        'result': 'success',
+        'submission': ret
+    })
+
+
 @app.route('/')
 def home():
     return render_template('index.html')

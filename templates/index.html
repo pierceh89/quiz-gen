@@ -92,15 +92,15 @@ ${script}
                     'success': function(response) {
                         if(response['result'] === 'success') {
                             let detail = response['detail'];
-                            let html = `<h2>결과: ${detail['score']} / ${detail['fullScore']}</h2>
-<h2>정답</h2><ol>`;
-                            let pairs = detail['pairs'];
-                            console.log(pairs);
-                            for(let i=0; i<pairs.length; i++) {
-                                let ans = pairs[i][1];
-                                html += `<li>${ans}</li>`;
-                            }
-                            html += '</ol>';
+                            let html = `<h2>결과: ${detail['score']} / ${detail['fullScore']}</h2>`;
+                            // let html = `<h2>결과: ${detail['score']} / ${detail['fullScore']}</h2><h2>정답</h2><ol>`;
+                            // let pairs = detail['pairs'];
+                            // console.log(pairs);
+                            // for(let i=0; i<pairs.length; i++) {
+                            //     let ans = pairs[i][1];
+                            //     html += `<li>${ans}</li>`;
+                            // }
+                            // html += '</ol>';
                             $('#result').html(html);
                         }
                     }

@@ -49,6 +49,7 @@ def scoring_submission():
     }
     db.submission.insert_one(result)
     del result['_id']
+    del result['pairs']
     return jsonify({
         'result': 'success',
         'detail': result

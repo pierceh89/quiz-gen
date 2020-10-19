@@ -1,0 +1,10 @@
+```python
+import requests
+[[quiz]] bs4 import BeautifulSoup
+
+# scraping www.daum.net
+response = requests.[[quiz]]('www.daum.net')
+soup = BeautifulSoup(response.[[quiz]], 'html.parser')
+
+some_value = soup.select_one('.some_class')
+```

@@ -1,0 +1,13 @@
+```javascript
+function isEven(number) {
+    [[quiz]] (number % 2 == 0) {
+        return true
+    } [[quiz]] {
+        return false
+    }
+}
+
+// 함수 호출
+let isEven = [[quiz]](10)
+console.log(isEven)
+```

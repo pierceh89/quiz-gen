@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+import os
 
 client = MongoClient('127.0.0.1', 27017)
 db = client.dbquiz
 
 app = Flask(__name__)
+SUB_AUTH = os.environ.get('AUTH')
 
 
 @app.route('/gen', methods=['GET'])
@@ -70,8 +72,15 @@ def submissions():
     return render_template('submissions.html')
 
 
-@app.route('/sub-list')
+@app.route('/sub-list', methods=['POST'])
 def get_submissions():
+    given_auth = request.form.get('auth')
+    if given_auth == '' or given_auth != SUB_AUTH:
+        return jsonify({
+            'result': 'fail',
+            'msg': '올바른 비밀번호를 입력해주세요'
+        })
+
     subs = list(db.submission.find({}, {'_id': False}))
     ret = {}
     for sub in subs:
@@ -92,4 +101,6 @@ def home():
 
 
 if __name__ == '__main__':
+    if SUB_AUTH is None:
+        raise RuntimeError('AUTH env must be provided')
     app.run('0.0.0.0', port=5000, debug=True)

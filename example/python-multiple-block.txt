@@ -1,0 +1,66 @@
+```python
+# 주석
+# 빈 리스트 만들기
+a_list = [[quiz]]
+a_list.[[quiz]](1) # 리스트에 값을 넣는다
+
+# 빈 딕셔너리 만들기
+a_dict = [[quiz]]
+wizard = {'name': 'Harry Potter', 'age': 40}
+# 'name' 출력하기
+print(wizard['[[quiz]]'])
+
+# 함수 만들기
+[[quiz]] sum_all(a, b, c):
+    return a + b + c
+
+# 함수 호출하기
+sum = [[quiz]](1, 2, 3)
+
+# 조건문
+def check_generation(age):
+    [[quiz]] age > 120:
+        print('와 19세기에 태어나셨군요')
+    [[quiz]] age >= 80:
+        print('80세 이상! 인생은 여든부터!')
+    [[quiz]]:
+        print('젊으시군요! 장래희망이 뭔가요?')
+```
+```python
+# 웹 스크래이핑
+[[quiz]] requests
+[[quiz]] bs4 import BeautifulSoup
+
+# URL을 읽어서 HTML를 받아오고,
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
+data = requests.[[quiz]]('https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200716', headers=headers)
+
+# HTML을 BeautifulSoup이라는 라이브러리를 활용해 검색하기 용이한 상태로 만듦
+soup = [[quiz]](data.text, 'html.parser')
+
+# select를 이용해서, tr들을 불러오기
+movies = soup.[[quiz]]('#old_content > table > tbody > tr')
+
+# movies (tr들) 의 반복문을 돌리기
+for movie in movies:
+    # movie 안에 a 가 있으면,
+    a_tag = movie.select_one('td.title > div > a')
+    if a_tag is not None:
+        # a의 text를 찍어본다.
+        print(a_tag.text)
+```
+```python
+from pymongo import [[quiz]]  # pymongo를 임포트 하기(패키지 설치 먼저 해야겠죠?)
+
+client = MongoClient('localhost', 27017)  # mongoDB는 27017 포트로 돌아갑니다.
+db = client.dbsparta  # 'dbsparta'라는 이름의 db를 사용합니다. 'dbsparta' db가 없다면 새로 만듭니다.
+
+# MongoDB에 insert 하기
+
+# 'users'라는 collection에 데이터를 생성합니다.
+db.users.[[quiz]]({'name': '덤블도어', 'age': 116})
+
+# 'users'에서 'name'이 덤블도어인 데이터 찾기
+found_user = db.users.[[quiz]]({'name': '덤블도어'})
+```

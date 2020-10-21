@@ -1,0 +1,65 @@
+```javascript
+function sum([[quiz]], [[quiz]]) {
+    console.log('num1: ', num1, ', num2: ', num2);
+    return num1 + num2;
+}
+
+[[quiz]] temp;
+
+temp = sum(3,5);
+console.log(temp);
+
+[[quiz]] myEmail = 'sparta@gmail.com'
+// '@'로 문자열을 나누기
+myEmail.[[quiz]]('@')
+```
+```javascript
+function compareNinety(num) {
+    [[quiz]] (num > 90) {
+        console.log('90보다 커요!')
+    } [[quiz]] {
+        console.log('90보다 작아요!')
+    }
+}
+// 함수 호출
+[[quiz]](30);
+
+// AND 조건
+function isTwenty(person) {
+    if (person['age'] >= 20 [[quiz]] person['age'] < 30) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// OR 조건
+function isNotTwenty(person) {
+    if (person['age'] < 20 [[quiz]] person['age'] >= 30) {
+        return true;
+    } else {
+        return false;
+    }
+}
+```
+```javascript
+// ajax 호출
+// 따릉이 API 호출
+$.ajax({
+    type: "GET",
+    url: "http://openapi.seoul.go.kr:8088/6d4d776b466c656533356a4b4b5872/json/bikeList/1/99",
+    data: {},
+    success: function([[quiz]]) {
+        let bikeStatus = response['rentBikeStatus'];
+        let stationInfos = response['row'];
+        for(let i=0; i < stationInfos.[[quiz]] ; i++){
+            // station dictionary
+            // stationName : 따릉이 정거장 이름
+            // parkingBikeTotCnt : 세워져있는 따릉이 수
+            let station = stationInfos[[[quiz]]];
+            // 정거장, 세워져있는 따릉이 수 출력
+            console.log(station['[[quiz]]'], station['[[quiz]]']);
+        }
+    }
+})
+```

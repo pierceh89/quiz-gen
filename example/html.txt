@@ -1,0 +1,23 @@
+```html
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인페이지</title>
+    <style>
+        .login-title {
+            color: white;
+            [[quiz]]: 300px;
+            height: 200px;
+            background-image: url('https://www.ancient-origins.net/sites/default/files/field/image/Agesilaus-II-cover.jpg');
+            background-[[quiz]]: center;
+            background-[[quiz]]: cover;
+
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 40px;
+        }
+    </style>
+</head>

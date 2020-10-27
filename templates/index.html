@@ -10,8 +10,8 @@
                 integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
                 crossorigin="anonymous"></script>
         <link rel="stylesheet"
-              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/solarized-dark.min.css">
-        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+              href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.1/build/styles/solarized-dark.min.css">
+        <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.3.1/build/highlight.min.js"></script>
         <style>
             .component-gap {
                 margin-top: 15px;
@@ -24,6 +24,26 @@
         </style>
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">Quiz</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">퀴즈 풀기 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gen">퀴즈 만들기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/sub">제출 현황</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <div class="container-lg">
             <div class="jumbotron component-gap">
                 <h1>

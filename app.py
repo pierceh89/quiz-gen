@@ -16,6 +16,12 @@ def generator():
 
 @app.route('/gen', methods=['POST'])
 def generate_quiz():
+    given_auth = request.form['auth']
+    if given_auth == '' or given_auth != SUB_AUTH:
+        return jsonify({
+            'result': 'fail',
+            'msg': '올바른 비밀번호를 입력해주세요'
+        })
     title = request.form['title']
     script = request.form['quizScript']
     answers = request.form.getlist('answers[]')

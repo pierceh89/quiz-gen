@@ -16,7 +16,7 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 export AUTH=password # submission 확인할 때 사용할 패스워드 입력
-gunicorn -w 2 -b 0.0.0.0:80 app:app
+gunicorn -w 2 -b 0.0.0.0:5000 app:app
 ```
 3. quiz 예제는 [example](example) 참조
 
